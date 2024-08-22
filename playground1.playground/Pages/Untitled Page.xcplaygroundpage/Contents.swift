@@ -266,7 +266,7 @@ else{
     calificacionFinal
     print("La calificación del alumno es:", calificacionFinal)
 }
-*/
+
 
 
 func getMonth(month:Int){ // Se declara la funcion getMonth con parametro de entrada month de tipo int
@@ -492,4 +492,170 @@ func num(n:Int){
     }
 }
 
-num(n: 2)
+num(n: 4)
+
+// RECUERDA QUE EL FOR TAMBIEN LE PUEDES PONER LOS VALORES QUE QUIERES QUE TOME, for a in 1..10 y lo va a tomar hasta el 10 y asi puedes eliminar los arreglos
+ */
+/* Ejercicio 8
+ Escribe un programa que calcule la suma de todos los números pares del 1 al 100 y muestre el resultado.
+ Para saber si un número es par se tiene que dar la siguiente condicion (numero % 2 == 0)
+*/
+var resultado = 0
+for num in 1...100{
+        if num % 2 == 0{
+            resultado = resultado + num
+        }
+}
+
+print("La suma de todos los numeros pares del 1 al 100 es:", resultado)
+
+
+/* Ejercicio 9
+ Escribe una función que cuente el número de vocales en una palabra y lo pinte.
+ Tip: Las palabras (strings) pueden recorrerse con bucle for
+*/
+
+var cuenta:Int = 0
+func vocales(palabra:String){
+    for vocal in palabra{
+        switch vocal.lowercased(){ // Con el .lowercased lo que se hace es que todo el texto se pasa a minusculas y entonces ahora si ya no va a haber el problema de mayusculas y minusculas
+            case "a", "e", "i", "o", "u": cuenta += 1
+            default: continue
+        }
+        }
+    print("El numero de vocales en la palabra:", palabra, "son:", cuenta)
+}
+vocales(palabra: "JACOBO")
+
+
+
+// TUPLAS
+
+
+
+// Es una variable que puede contener muchas cosas, es como un array pero acepta cualquier tipo de variable
+// Cuando se hagan aplicaciones, una vista va a necesitar un nombre una edad, etc y se lo vamos a pasar en una tupla
+var tupla = ("Diego", 21, true, "Calle mi casa", 2323243, 1.98)
+
+print(tupla.0) // Para acceder a las tuplas se pone el nombre de la tupla seguida de un punto y se pone el numero de la posicion a la que se quire acceder en la tupla
+
+
+
+// Diccionarios
+
+
+
+// Es una especie de tupla pero funciona con clave y valor
+
+// Se declara un diccionario que la clave va a ser string y el valor va a ser de tipo any lo que se traduce como que el valor puede ser te cualquier tipo
+var diccionario:[String: Any] = ["name": "Diego", "age": 21, "imHappy": true, "address": "Calle mi casa"]
+
+var miNombreEnDiccionario:String = diccionario["name"] as? String ?? "Error por que no es un string el valor" // Se declara una variable de tipo string y se le asigna el valor que hay en el diccionario cuando la clave es name pero como a xcode le dijimos que el valor podia ser un any hay que hacer una conversion a string se hace con el as? string, pero si lo dejas hasta ahi dice que es un Diego optional pero que pasa si no es un string, entonces hay que darle un valor por defecto y eso se da con el ?? y entre parentesis el valor opcional que se le da
+// Por esto mismo no es lo mejor usar un diccionario, para evitar problemas y se usa una tupla pero hay casos especificos en los que se debe de usar un diccionario
+print(miNombreEnDiccionario)
+
+// Con el for tambien podemos recorrer diccionarios
+
+for (key, value) in diccionario{ // Lo recorremos pero necesitamos los valores de key y value en el diccionario y asi podemos sacar los valores relaciones de key value y utilizarlos
+    print("La clave: ", key, "contiene:", value)
+}
+
+
+
+// Nulabilidad
+
+
+
+var variable:String = "lo que sea" // No permite valores opcionales
+var variablenula:String? = nil // Esto es una variable nula, esta variable permite valores opcionales
+
+print(variable)
+print(variablenula)
+
+// Si intentamos acceder a una variable y esta vacia nos revienta la aplicacion
+// Cuando recuperemos info de internet siempre esta la posibilidad de que venga ese valor vacio, null o nil
+
+func ejemploNil(text:String){
+    
+}
+
+ejemploNil(text: variable)
+// Da error por que espera que le pasemos un string, y esa variable es nula
+// ejemploNil(text: variablenula)
+// Una forma en la que podemos arreglar esto es pasandole la variable nula y en caso que el valor sea nulo se puede poner ?? para tener ese valor opcional  en caso de que sea nula, para evitar errores en la aplicacion
+ejemploNil(text: variablenula ?? "la variable es nula")
+
+// EXTREMO CUIDADO
+
+// (text:variablenula!) // Cuando estamos seguros de que la variable no va a ser nula, de esta manera decimos que estamos seguros que es un string y si no es asi, la aplicacion va a reventar
+
+func ejemploNil2(text:String?){
+    // Aqui vamos a ver como trabajar con la variable nil, por que como puede ser nula, puede causar que la aplicacion se rompa
+    if let example = text{ // Se declara la variable example y se dice que si la variable example es igual a text se va a imprimir la variable example, con esto nos aseguramos que si la variable es nula podamos desviarlo para que la aplicacion no se rompa
+        print(example) // Se pone por que solo queremos pintarlo cuando sea una variable real, no un nil
+    }
+    else{// Esta dedicado por si quieres hacer una cosa u otra
+        print("Introduce un nombre para continuar")
+    }
+    // Si solo quremos que haga una cosa:
+    guard let example2 = text else{ // el codigo va a avanzar pero si text es nil, no va a continuar a hacer el resto de las cosas
+        return // necesita un return por que si se da la condicion va a salir y ya no va a hacer el resto de las cosas
+    }
+    print("Hola example2") // Esto solo se va a llamar si la variable es una real, no nil, o sea si la variable tiene un valor
+}
+
+ejemploNil(text: variable)
+ejemploNil2(text: variablenula)
+
+
+
+// Clases
+
+
+
+// El codigo de una aplicacion es muy grande y por lo tanto no se suele tener todo en el mismo fichero y por lo tanto se usan funciones mas potentes
+
+// Las clases son un molde, la clase es como un muñeco y dentro de la clase podemos crear diferentes atributos y asi le damos caracteristicas al muñeco y aparte podemos crear diferentes muñecos
+
+class Persona{
+    var name:String
+    var age:Int
+    // El init es un constructor, es como el modelo para crear una funcion, cuando queremos crear una persona, lo que vamos a crear es un objeto
+    // Este metodo, el metodo constructor se va a llamar cada vez que se instancie a la clase persona, cuando se crea un objeto, lo que esta en el constructor se pide que se den valores en el objeto de la clase
+    init(name: String, age: Int) { // En el metodo constructor, lo que esta adentro del parentesis son parametros de entrada
+        self.name = name
+        self.age = age
+    }
+    // greetings = saludos
+    func greetings(){
+        print("Hola soy", name, "y tengo", age, "años")
+    }
+}
+// Aqui se creo un objeto de tipo persona y se le poen el valor de la variable Nombre como Diego y el valor de la edad 21
+var Diego:Persona = Persona(name: "Diego", age: 21)
+Diego.greetings() // Como Diego es un objeto de la clase Persona, se le puede pedir que haga las cosas que estan declaradas en la clase persona, por lo tanto las funciones que estan en la clase las puede realizar el objeto, se llama al objeto Diego . greetings() y por lo tanto se le pide que haga la función greetings(), pero siendo el objeto Diego, por lo tanto se van a tomar los atributos del objeto Diego
+
+// Para crear un objeto de tipo persona, obligatoriamente debes de pasarle los atributos
+
+
+
+// Por ejemplo cuando estemos creando aplicaciones un juego puede tener un objeto jugador y ese jugador va a tener toda su información, si hay 4 jugadores, va a haber 4 objetos de la clase jugador
+
+
+
+// Struct
+
+
+
+// Una estructura es una forma de almacenar infomración, es como si fuera una tupla pero mas potente y al final es como tener un modelo de datos
+// Se declara una estructura con dos variables adentro
+struct ExampleStruct{
+    var name:String
+    var age:Int
+}
+// Se declara una variable que es de tipo struct, example struct y se pide que se den valores para las variables que estan dentro de la estructura
+var exampleStruct:ExampleStruct = ExampleStruct(name: "Diego", age: 21)
+var nombree = exampleStruct.name // Se crea la variable nombree para guardar la infomacion que hay en el objeto exampleStruct y que es el nombre por eso el .name
+print(nombree)
+
+
