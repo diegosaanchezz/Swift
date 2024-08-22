@@ -382,8 +382,114 @@ numType(number: 1) // Se llama la funcion numType y se pone que el parametro de 
 // Se pueden guardar muchas variables en una variable
 let name1 = "pepe"
 let name2 = "andres"
-let names
+// En los arrays empieza desde la posición 0
+let names:[String] = ["Fulanito", "Diego", "Pepe", "David"] // el nombre del array es names, se declara que es string y se guarda dentro del array las variables que estan en los corchetes
+print(names[1]) // Para acceder a las variables que estan guardades dentro del array se debe de poner como lo muestra, el nombre del array y entre corchetes el numero de posicion en el array que se quiere tomar, empezando desde el 0
+
+var daysWeek:[String] = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
+
+// Se pueden modificar, borrar, añadir elementos del array
+
+print(daysWeek[3]) // Se imprime el valor que esta en la posicion 3 del array
+daysWeek[3] = "Juernes"// Se modifica el valor que esta en la posición 3 por "Juernes" que es el valor que ahora esta cambiando
+print(daysWeek[3]) // Se imprime el valor nuevo que se le dio a la posición 3 del array
+
+print(daysWeek[0])
+// daysWeek.removeAll() // Se imprime el array vacio por que se borraron todos los datos dentro del array
+daysWeek.remove(at: 0)
+print(daysWeek[0]) // Se imprime el martes por que ya se borro el elemento 0 del array que era lunes
+
+daysWeek.append("Diego") // Con el append se agrega un nuevo elemento al final de la fila
+print(daysWeek)
 
 
 
+// Bucles
+var daysWeek2:[String] = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
 
+// Para recorrer un array se usan los bucles, con los bucles se va en busca de un valor que queremos encontrar
+
+
+// EL I SON CADA UNA DE LAS POSICIONES, LE DECIMOS QUE VAYA DEL 1 HASTA AL 5, ES COMO SI POR CADA VEZ QUE SE CORRE SE LE SUMARA UN +1 A LA I ASI HASTA LLEGAR AL 5
+for i in daysWeek2{ // Con el bucle for, en este caso se puede imprimir la pantalla 5 veces sin necesidad de hacer 50 prints, ya que el bucle for lo hace por nosotros y lo imprime las veces que nosotros le indiquemos
+    print("Dia:", i) // Lo que imprime es el mensaje dias y por cada ves que lo imprime, imrpime un dia de lo semana, con esto estamos recorriendo el array con todos los valores que tiene dentro
+}
+
+
+
+// El for se usa cuando sabemos el numero de veces que queremos iterar, el numero de veces es el mismo que el tamaño del array, iterar es cada una de las veces que el for cambia de valor, el numero de vueltas del for es igual al tamaño del array
+
+
+
+for day in daysWeek2{ // En el ciclo for se declara en vez de i, day que solamente es como el valor que se le asigna por cada espacio en el array que recorre, cuando hace la primera pasada el valor de day es lunes, en la segunda es martes y asi con cada uno de los dias de la semana y agregamos un if anidado que lo que hace es que el for va a recorrer el array y en el if se dice que cuando encuentre que day sea igual a jueves nos avise con el print que el jueves esta en el listado
+    if day == "Jueves"{
+        print("Esta el jueves en el listado")
+    }
+}
+
+// Cuando no tenemos el caso anterior, que no sabemos cuantas veces va a iterar se usa el siguiente:
+
+var count = 0 // Se declara la variable count y se iguala a 0, ya que va a empezar en 0
+while count < 10{ // Lo vamos a utilizar cuando queramos esperar a que una condicion sea verdadera, dice que se haga el bucle hasta que count deje de ser -10
+    print("Hola soy un contador y valgo", count) // Se va a imprimir esto por cada vez que se recorra el bucle completo, y podemos observar que el valor de count va a ir cambiando de valor por que por cada vez que pase se le va a sumar 1, empieza en 0, completa el recorrido y ahora count vale 1, y se guarda que vale 1, despues hace el recorrido y ahora a ese 1 se le suma otro por que por cada que se complete se suma 1 y asi se seguira ejecutando hasta que que el while sea verdadero
+    count += 1
+}
+
+// El ultimo bucle es muy parecido al while
+
+// Este siempre se repite al menos 1 vez
+// Si queriamos que el while no se repitiera se pone count = 10 y en ningun momento es verdadero entonces nunca se imprime nada, por que acabo todo el escaneo y nunca fue verdadero pero con el while repeat si se hace el escaneo al menos 1 vez
+
+var count2 = 5 // Declaramos la variable count2
+// es como un do while, se hace mientras que...
+// En este caso con el repeat siempre se va a cumplir 1 vez
+repeat {
+    print("Pepe")
+} while count2 < 0
+
+// Hay dos formas de salir de los bucles, nosotros estamos dando vuelta en el bucle hasta cuando vemos lo que nos interesa y otro cuando decimos hay muchas condiciones pero como se acaba de pasar esto pasate a lo siguiente
+
+// En este caso tenemos un array de tipo string con los dias de la semana dentro del array
+var daysWeek3:[String] = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
+
+// Tenemos un for que va a recorrer el array daysWeek3
+// Tenemos un if anidado que lo que va a hacer es que si day, que es la variable que cambia de valor por cada pasada que hace es igual a jueves va a imprimir que es jueves y tiene un break que cuando esa condicion se cumpla va a salir del bucle y tenemos un else por si el if no se cumple se vaya al else e imprima que no es jueves y va a seguir dando vueltas hasta que la condicion se cumpla y si no es jueves va a seguir entrando al else hasta que se cumpla el if y entrando el if el break va a sacar automaticamente del bucle
+for day in daysWeek3{
+    if day == "Jueves"{
+        print("Es jueves")
+        break
+    }
+    else{
+        print("No es jueves ")
+    }
+}
+
+print()
+
+
+// Tenemos otro caso, cuando en el bucle tenemos un continue, que significa que pare con la vuelta que esta dando y pase a la siguiente vuelta de recorrer el bucle, con el continue cuando pase por la vuelta en donde se cumpla el if, va a entrar al if y cuando vea el continue, va a saltarse el resto del codigo, entonces no va a imprimir el day, entonces no va a imprimir el valor de day que hay en esa vuelta entonces no va a imprimir Jueves, por que es lo que le corresponderia al day en esa pasada
+for day in daysWeek3{
+    if day == "Jueves"{
+        print("Es jueves")
+        continue
+    }
+    print(day)
+}
+
+
+
+/* Ejercicio 7
+ Escribe una función que reciba un número e imprima su tabla de multiplicar del 1 al 10
+ 
+*/
+var numerosTablas:[Int] = [1,2,3,4,5,6,7,8,9,10]
+var cuenta = 0
+func num(n:Int){
+    for a in numerosTablas{
+        var resultadoTabla = a * n
+        cuenta += 1
+        print(n, "x", a, "=", resultadoTabla)
+    }
+}
+
+num(n: 2)
