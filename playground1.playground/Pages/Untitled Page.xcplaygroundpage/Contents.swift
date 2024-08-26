@@ -525,7 +525,8 @@ func vocales(palabra:String){
         }
     print("El numero de vocales en la palabra:", palabra, "son:", cuenta)
 }
-vocales(palabra: "JACOBO")
+vocales(palabra: "Jacobo"
+)
 
 
 
